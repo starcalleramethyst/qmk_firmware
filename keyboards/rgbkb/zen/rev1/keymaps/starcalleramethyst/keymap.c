@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 
+
 uint16_t copy_paste_timer;
 
 enum custom_keycodes {
@@ -115,33 +116,82 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+/* 0
+   * ,-----------------------------------------.             .-----------------------------------------.
+   * | GESC |   1  |   2  |   3  |   4  |   5  |             |   6  |   7  |   8  |   9  |   0  | \    |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | Tab  |   Q  |   W  |   E  |   R  |   T  |             |   Y  |   U  |   I  |   O  |   P  | BKSP |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | LCTL |   A  |   S  |   D  |   F  |   G  |             |   H  |   J  |   K  |   L  |   ;  |  "   |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | Shift|   Z  |   X  |   C  |   V  |   B  |             |   N  |   M  |   ,  |   .  |   /  |Ent/shft |
+   * |------+------+------+------+------+------+             +------+------+------+------+------+------|
+   * | CCCV | GUI  | Alt  |RGBTOG| MO(1)|                           | MO(2)|   -  |   =  | PGUP | PGDN |
+   * `--------------------------------+---------+------++-----+---------+------------------------------'
+                                      |Space/dot|Delete||Enter|Space/dot|
+                                      +---------------------------------+
+*/
+
 	[0] = LAYOUT(
-KC_GESC, KC_1, 	KC_2, 	KC_3, 	KC_4, 	KC_5, 				KC_6, 	KC_7, 	KC_8, 	KC_9, 	KC_0, KC_BSLS, 
-KC_TAB,  KC_Q, 	KC_W, 	KC_E, 	KC_R, 	KC_T, 				KC_Y, 	KC_U, 	KC_I, 	KC_O, 	KC_P, KC_BSPC, 
-KC_LCTL, KC_A, 	KC_S, 	KC_D, 	KC_F, 	KC_G, 				KC_H, 	KC_J, 	KC_K, 	KC_L, 	KC_SCLN, KC_QUOT, 
-KC_LSFT, KC_Z, 	KC_X, 	KC_C, 	KC_V, 	KC_B, 				KC_N, 	KC_M, 	KC_COMM, KC_DOT, KC_SLSH, KC_SFTENT, 
-KC_CCCV,   KC_LGUI, KC_LALT, RGB_TOG, MO(1), TD(TD_SPC_DOT), KC_BSPC, KC_ENT, TD(TD_SPC_DOT), MO(2), KC_MINS, KC_EQL, KC_PGUP, KC_PGDN),
+KC_GESC,      KC_1, 	 KC_2, 	  KC_3,  KC_4, 	KC_5, 				                                          KC_6, 	 KC_7, 	   KC_8, 	  KC_9, 	 KC_0,   KC_BSLS, 
+KC_TAB,       KC_Q, 	 KC_W, 	  KC_E,  KC_R, 	KC_T, 			     	                                      KC_Y, 	 KC_U, 	   KC_I, 	  KC_O, 	 KC_P,   KC_BSPC, 
+KC_LCTL,      KC_A, 	 KC_S, 	  KC_D,  KC_F, 	KC_G, 			     	                                      KC_H, 	 KC_J, 	   KC_K, 	  KC_L, KC_SCLN,   KC_QUOT, 
+KC_LSFT,      KC_Z, 	 KC_X, 	  KC_C,  KC_V, 	KC_B, 				                                          KC_N, 	 KC_M, 	KC_COMM,  KC_DOT, KC_SLSH, KC_SFTENT, 
+KC_CCCV,   KC_LGUI, KC_LALT, RGB_TOG, MO(1),        TD(TD_SPC_DOT), KC_BSPC, KC_ENT, TD(TD_SPC_DOT),           MO(2), KC_MINS,  KC_EQL, KC_PGUP,  KC_PGDN),
+
+/* 1
+   * ,-----------------------------------------.             .-----------------------------------------.
+   * | f1   |  f2  |  f3  |  f4  |  f5  |  f6  |             |  f7  |  f8  |  f9  | f10  | f11  | f12  |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * |      |sat+  |vib-  |sat-  |RESET |   [  |             |   ]  |PGUP  |  UP  |PGDWN | INS  | HOME |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | CAPS |hue-  |vib+  |hue+  |      |      |             |      |LEFT  | DWN  |RIGHT | DEL  |  END |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | Shift|      |      |      |      |      |             |NKRO  |      |      |MPLAY |MPRV  |MNXT  |
+   * |------+------+------+------+------+------+             +------+------+------+------+------+------|
+   * | NONE | GUI  | Alt  |RGBTOG|      |                           |      |      |MMUTE |VOL+  |VOL-  |
+   * `--------------------------------+---------+------++-----+---------+------------------------------'
+                                      |Space/dot|Delete||Enter|Space/dot|
+                                      +---------------------------------+
+*/
 
 	[1] = LAYOUT(
-KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, KC_F6, 			KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, 
-KC_TRNS, RGB_SAI, RGB_VAI, RGB_SAD, RESET, KC_LBRC, 			KC_RBRC, KC_PGUP, KC_UP, KC_PGDN, KC_INS, KC_HOME, 
-KC_CAPS, RGB_HUD, RGB_VAD, RGB_HUI, KC_TRNS, KC_TRNS, 			KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, KC_END, 
-KC_LSFT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, 			MAGIC_TOGGLE_NKRO, KC_TRNS, KC_TRNS, KC_MPLY, KC_MPRV, KC_MNXT, 
-KC_NO,   KC_LGUI, KC_LALT, RGB_MOD, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MUTE, KC_VOLU, KC_VOLD),
+  KC_F1,     KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6, 			                                           KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,   KC_F12, 
+KC_TRNS,   RGB_SAI, RGB_VAI, RGB_SAD,   RESET, KC_LBRC, 			                                         KC_RBRC, KC_PGUP,   KC_UP, KC_PGDN,  KC_INS,  KC_HOME, 
+KC_CAPS,   RGB_HUD, RGB_VAD, RGB_HUI, KC_TRNS, KC_TRNS, 			                                         KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL,   KC_END, 
+KC_LSFT,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, 			                               MAGIC_TOGGLE_NKRO, KC_TRNS, KC_TRNS, KC_MPLY, KC_MPRV,  KC_MNXT, 
+  KC_NO,   KC_LGUI, KC_LALT, RGB_MOD, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_MUTE, KC_VOLU, KC_VOLD),
 
-/*	[2] = LAYOUT(
+/*	[2] = LAYOUT( //dvorak layer, will explore in the future
 KC_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, 				KC_6,KC_7, KC_8, KC_9, KC_0, KC_BSLS, 
 KC_TAB,  KC_Q, KC_W, KC_F, KC_P, KC_G, 				KC_J, KC_L, KC_U, KC_Y, KC_SCLN, KC_BSPC, 
 KC_LCTL, KC_A, KC_R, KC_S, KC_T, KC_D, 				KC_H, KC_N, KC_E, KC_I, KC_O, KC_QUOT, 
 KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, 				KC_K, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_ENT, 
 KC_LCTL, KC_LGUI, KC_LALT, KC_NO, TO(0), KC_SPC, KC_BSPC, KC_ENT, KC_SPC, TO(0), KC_MINS, KC_EQL, KC_PGUP, KC_PGDN),
 */
+
+/* 2
+   * ,-----------------------------------------.             .-----------------------------------------.
+   * | NONE | NONE | NONE | NONE | NONE | NONE |             | NONE | NONE | NONE | NONE | NONE |NONE  |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | NONE | NONE | NONE | NONE |SL_H_P| NONE |             | NONE |NONE  | NONE |NONE  | NONE | NONE |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | NONE |EM-CL |EM-FU |EM-O  |SL_H  |SCRNCL|             | NONE |NONE  | NONE |NONE  | NONE | NONE |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | NONE |DBLC_C|EM-SS |TICK-T|TICK-B|NONE  |             |NONE  | NONE | NONE |NONE  |NONE  |NONE  |
+   * |------+------+------+------+------+------+             +------+------+------+------+------+------|
+   * | NONE | NONE |NONE  |NONE  | NONE |                           | NONE | NONE |NONE  |NONE  |NONE  |
+   * `--------------------------------+---------+------++-----+---------+------------------------------'
+                                      | NONE |NONE|       |NONE|NONE|
+                                      +-----------------------------+
+*/
+
 	[2] = LAYOUT(
-KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 			KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
-KC_NO, KC_NO, KC_NO, KC_NO, S_H_P, KC_NO, 			KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
-KC_NO, E_CL,  E_FU,  E_OP,  S_H,   SCRN_C, 			KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
-KC_NO, DC_C, E_SS, T_H_T, T_H_B, KC_NO, 			KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
-KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO)
+KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO, 			                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+KC_NO, KC_NO, KC_NO, KC_NO, S_H_P,  KC_NO, 			                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+KC_NO,  E_CL,  E_FU,  E_OP,   S_H, SCRN_C, 			                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+KC_NO,  DC_C,  E_SS, T_H_T, T_H_B,  KC_NO, 			                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,          KC_NO, KC_NO, KC_NO, KC_NO,         KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO)
 
 };
 
