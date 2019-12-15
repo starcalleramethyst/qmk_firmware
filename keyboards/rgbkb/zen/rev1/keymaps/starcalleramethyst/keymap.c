@@ -173,7 +173,7 @@ KC_CCCV,   KC_LGUI, KC_LALT, RGB_TOG, MO(1),        TD(TD_SPC_DOT), KC_BSPC, KC_
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |sat+  |vib-  |sat-  |RESET |   [  |             |   ]  |PGUP  |  UP  |PGDWN | INS  | HOME |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | CAPS |hue-  |vib+  |hue+  |      |      |             |      |LEFT  | DWN  |RIGHT | DEL  |  END |
+   * | CAPS |hue-  |vib+  |hue+  |VELOC |      |             |      |LEFT  | DWN  |RIGHT | DEL  |  END |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * | Shift|      |      |      |      |      |             |NKRO  |      |      |MPLAY |MPRV  |MNXT  |
    * |------+------+------+------+------+------+             +------+------+------+------+------+------|
@@ -186,7 +186,7 @@ KC_CCCV,   KC_LGUI, KC_LALT, RGB_TOG, MO(1),        TD(TD_SPC_DOT), KC_BSPC, KC_
 	[1] = LAYOUT(
   KC_F1,     KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6, 			                                           KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,   KC_F12, 
 KC_TRNS,   RGB_SAI, RGB_VAI, RGB_SAD,   RESET, KC_LBRC, 			                                         KC_RBRC, KC_PGUP,   KC_UP, KC_PGDN,  KC_INS,  KC_HOME, 
-KC_CAPS,   RGB_HUD, RGB_VAD, RGB_HUI, KC_TRNS, KC_TRNS, 			                                         KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL,   KC_END, 
+KC_CAPS,   RGB_HUD, RGB_VAD, RGB_HUI, VLK_TOG, KC_TRNS, 			                                         KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL,   KC_END, 
 KC_LSFT,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, 			                               MAGIC_TOGGLE_NKRO, KC_TRNS, KC_TRNS, KC_MPLY, KC_MPRV,  KC_MNXT, 
   KC_NO,   KC_LGUI, KC_LALT, RGB_MOD, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_MUTE, KC_VOLU, KC_VOLD),
 
