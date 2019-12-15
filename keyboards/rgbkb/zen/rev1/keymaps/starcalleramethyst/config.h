@@ -1,5 +1,5 @@
 /*
-Copyright 2019 starcalleramethyst 
+Copyright 2019 Zachary Byrd ToppleLD@gmail.com @starcalleramethyst
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
