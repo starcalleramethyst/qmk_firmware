@@ -17,8 +17,9 @@ enum custom_keycodes {
   KC_CCCV,    // one key copy/paste 
   ZD_STAT_P,  // zendesk status pending 
   ZD_STAT_O,  // zendesk status open 
-  ZD_STAT_S,  // zendesk status solved
+  ZD_STAT_S,  // zendesk status solved + close tab
   ZD_TAB,     // zendesk close tab
+  M_ZEN,      // rudimentary sends text string to make keeb
 
 };
 
@@ -115,6 +116,8 @@ break;
     case ZD_STAT_S:
           if (record->event.pressed) {
                 tap_code16(C(A(KC_S))); // send ctrl+alt+S
+                wait_ms(5000);          // wait 5 sec 
+                tap_code16(C(A(KC_W))); // send ctrl+alt+W
           }
 break;
 
@@ -123,6 +126,11 @@ break;
                 tap_code16(C(A(KC_W))); // send ctrl+alt+w
           }
 break;
+
+    case M_ZEN:
+          if (record->event.pressed) {
+              send_string("make rgbkb/zen/rev1:starcalleramethyst" SS_TAP(X_ENTER));
+          }
 
   }
   return true;
@@ -200,7 +208,7 @@ KC_LCTL, KC_LGUI, KC_LALT, KC_NO, TO(0), KC_SPC, KC_BSPC, KC_ENT, KC_SPC, TO(0),
 
 /* 2
    * ,-----------------------------------------.             .-----------------------------------------.
-   * | NONE | NONE | NONE | NONE | NONE | NONE |             | NONE | NONE | NONE | NONE | NONE |NONE  |
+   * | MAKE | NONE | NONE | NONE | NONE | NONE |             | NONE | NONE | NONE | NONE | NONE |NONE  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * | NONE | NONE |ZD_TAB| NONE |SL_H_P| NONE |             | NONE |NONE  |ZD_S_S|ZD_S_O|ZD_S_P| NONE |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
@@ -215,7 +223,7 @@ KC_LCTL, KC_LGUI, KC_LALT, KC_NO, TO(0), KC_SPC, KC_BSPC, KC_ENT, KC_SPC, TO(0),
 */
 
 	[2] = LAYOUT(
-KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO,  KC_NO, 			                            KC_NO,  KC_NO,      KC_NO,      KC_NO,     KC_NO,      KC_NO, 
+M_ZEN, KC_NO,  KC_NO, KC_NO, KC_NO,  KC_NO, 			                            KC_NO,  KC_NO,      KC_NO,      KC_NO,     KC_NO,      KC_NO, 
 KC_NO, KC_NO, ZD_TAB, KC_NO, S_H_P,  KC_NO, 			                            KC_NO,  KC_NO,  ZD_STAT_S,  ZD_STAT_O, ZD_STAT_P,      KC_NO, 
 KC_NO,  E_CL,   E_FU,  E_OP,   S_H, SCRN_C, 			                            KC_NO,  KC_NO,      KC_NO,      KC_NO,     KC_NO,      KC_NO, 
 KC_NO,  DC_C,   E_SS, T_H_T, T_H_B,  KC_NO, 			                            KC_NO,  KC_NO,      KC_NO,      KC_NO,     KC_NO,      KC_NO, 
