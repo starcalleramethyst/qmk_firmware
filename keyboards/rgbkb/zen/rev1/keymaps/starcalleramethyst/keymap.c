@@ -1,6 +1,8 @@
 #include QMK_KEYBOARD_H
+#include "starcalleramethyst.h"
 
 
+/* //commenting out to test userspace funcionality 
 uint16_t copy_paste_timer;
 
 enum custom_keycodes {
@@ -22,6 +24,9 @@ enum custom_keycodes {
   M_ZEN,      // rudimentary sends text string to make keeb
 
 };
+*/ 
+
+/* // commenting out to test userspace funcionality 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -135,7 +140,9 @@ break;
   }
   return true;
 };  
+*/
 
+/* // commenting out to test userspace funcionality 
 //Tap Dance Declarations
 enum {
   TD_SPC_DOT = 0
@@ -147,7 +154,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_SPC_DOT]  = ACTION_TAP_DANCE_DOUBLE(KC_SPC, KC_PDOT) 
 // Other declarations would go here, separated by commas, if you have them
 };
-
+*/
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
