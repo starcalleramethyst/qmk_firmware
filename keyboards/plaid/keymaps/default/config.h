@@ -17,3 +17,13 @@
 #pragma once
 
 // place overrides here
+
+/* ws2812 RGB LED */
+#define RGB_DI_PIN C4
+#define RGBLED_NUM 30   // Number of LEDs
+#define RGBLIGHT_HUE_STEP 6
+#define RGBLIGHT_SAT_STEP 4
+#define RGBLIGHT_VAL_STEP 8
+
+#define RGBLIGHT_TIMER
+#define RGBLIGHT_SLEEP
