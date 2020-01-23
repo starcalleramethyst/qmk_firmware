@@ -86,8 +86,7 @@ const uint16_t modifiers[] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) 
-{
+  switch (keycode) {
 
     case S_H:
       if (record->event.pressed) {
@@ -113,7 +112,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
  break;
 
-    case E_OP:
+ case E_OP:
       if (record->event.pressed) {
         // when keycode E_OP is pressed
         SEND_STRING("Hi , "SS_TAP(X_ENTER)SS_TAP(X_ENTER)"Thank you for contacting Peloton."SS_TAP(X_ENTER)SS_TAP(X_ENTER));
@@ -195,7 +194,6 @@ break;
               send_string("make rgbkb/zen/rev1:starcalleramethyst" SS_TAP(X_ENTER));
           }
 
-  }
 break;
 
   case M_PLD:
@@ -203,10 +201,8 @@ break;
               send_string("make plaid:starcalleramethyst" SS_TAP(X_ENTER));
           }
 
-  }
-break;
   return true;
-
+}
 ;  
 
 //
