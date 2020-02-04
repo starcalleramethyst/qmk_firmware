@@ -64,5 +64,4 @@
 #define LAYOUT_kc_ortho_4x12 KC_KEYMAP
 #define KC_LAYOUT_ortho_4x12 KC_KEYMAP
 
-#define LED_RED C5
-#define LED_GREEN C4
+
