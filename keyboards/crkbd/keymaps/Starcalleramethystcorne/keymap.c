@@ -84,11 +84,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        RESET,  RGBRST, XXXXXXX, XXXXXXX, XXXXXXX, TG(2),                      KC_MEDIA_PLAY_PAUSE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,\
+        RESET,  RGBRST, XXXXXXX, XXXXXXX, XXXXXXX, DF(1),                      KC_MEDIA_PLAY_PAUSE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,XXXXXXX,                      KC_AUDIO_VOL_UP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, DF(0),                      KC_AUDIO_VOL_UP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      KC_AUDIO_VOL_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(0),\
+      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      KC_AUDIO_VOL_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   LOWER,  KC_ENT,     KC_SPC,   RAISE, KC_RALT \
                                       //`--------------------------'  `--------------------------'
