@@ -14,6 +14,14 @@ enum layer_number {
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   NAV,
+  BRK,
+  LNCH,
+  EOD, 
+  LM1,
+  MM, 
+  AM,
+  GM,
+
 
 };
 
@@ -33,19 +41,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `------------------------------------------------''-----------------------------------------------'
    */
   [_QWERTY] = LAYOUT( \
-    KC_GESC,       _______, _______, _______, _______,  _______,                    _______,  _______,  _______, _______, _______,    KC_BSPC, \
-    KC_TAB,           KC_Q,    KC_W,    KC_E,    KC_R,     KC_T,                    _______,  _______,     KC_7,    KC_8,    KC_9,    _______, \
-    LT(_NAV, KC_CAPS),KC_A,    KC_S,    KC_D,    KC_F,     KC_G,                    _______,  _______,     KC_4,    KC_5,    KC_6,    _______, \
-    KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                    _______,  _______,     KC_1,    KC_2,    KC_3,    _______,  \
-    KC_LCTL,          KC_LGUI, KC_LALT, RGB_TOG, MO(_NAV), KC_SPC,  KC_DEL,  KC_ENT,   _______, _______,   KC_0,  KC_DOT, _______,       KC_ENT \
+    _______,       _______, _______, _______, _______,  _______,                    _______,  _______,  _______, _______, _______,    KC_BSPC, \
+    _______,        _______,   _______,   _______, _______, _______,                    _______,  _______,     KC_7,    KC_8,    KC_9,    _______, \
+    _______,        EOD,  _______,    _______, _______,  _______,                    _______,  _______,     KC_4,    KC_5,    KC_6,    _______, \
+    _______,        BRK, LNCH,_______,   _______,  _______,                    _______,  _______,     KC_1,    KC_2,    KC_3,    _______,  \
+    _______,        GM, MM, AM, LM1, _______,  _______,  KC_ENT,   _______, _______,   KC_0,  KC_DOT, _______,       KC_ENT \
   ),
 
 };
 
-#ifdef AUDIO_ENABLE
-float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
-#endif
 
 void persistant_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
@@ -54,24 +58,42 @@ void persistant_default_layer_set(uint16_t default_layer) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case QWERTY:
+    case BRK:
       if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_qwerty, false, 0);
-        #endif
-        persistant_default_layer_set(1UL<<_QWERTY);
+          SEND_STRING("I am going to break, and will return shortly!" SS_TAP(X_ENTER)) ;
       }
-      return false;
       break;
-    //case COLEMAK:
-      //if (record->event.pressed) {
-        //#ifdef AUDIO_ENABLE
-          //PLAY_NOTE_ARRAY(tone_colemak, false, 0);
-        //#endif
-        //persistant_default_layer_set(1UL<<_COLEMAK);
-      //}
-      //return false;
-      //break;
+    case LNCH:
+      if (record->event.pressed) {
+          SEND_STRING("I am going to lunch, and will return shortly!" SS_TAP(X_ENTER));
+      }
+      break;
+    case EOD:
+      if (record->event.pressed) {
+          SEND_STRING("@here All right HWSW humans, it has been an amazing day! Thank you for all of your work to support our members. I am out of here for the night at 4 pm! Let me know if there is anything I may do for you before I leave. :stars:" SS_TAP(X_ENTER));
+      }
+      break;
+    case LM1:
+      if (record->event.pressed) {
+          SEND_STRING("@here Leads are hopping into a 15 minute meeting at 1pm. Please slack us if you need anything during that time!" SS_TAP(X_ENTER));
+      }
+      break;
+    case MM:
+      if (record->event.pressed) {
+          SEND_STRING("@here Good Morning, morning crew! Please join me for our morning stand-up meeting! https://meet.google.com/vjb-kway-dwq" SS_TAP(X_ENTER));
+      }
+      break;
+    case AM:
+      if (record->event.pressed) {
+          SEND_STRING("@here Good Afternoon, afternoon crew! Please join me for our afternoon stand-up meeting! https://meet.google.com/fib-zwfr-fwd" SS_TAP(X_ENTER));
+      }
+      break;
+    case GM:
+      if (record->event.pressed) {
+          SEND_STRING("@here Good Morning everyone! We should all be in live channels at 7:45 CST. Let’s get this day rolling! :fireworks:" SS_TAP(X_ENTER));
+      }
+      break;
   }
   return true;
+
 }

@@ -28,24 +28,20 @@ To-do:
 
 enum custom_keycodes {
     S_H = SAFE_RANGE, // slack here
-    S_H_P, // slack here + paste
-    T_H_B, // ticket header bike
-    T_H_T, // ticket header tread
-    E_OP, // email open
-    E_CL, // email close
-    E_FU, // email follow up
-    E_SS, // email service schedule
-    SCRN_C, // screen clip
-    ZD_STAT_P, // zendesk status pending
-    ZD_STAT_O, // zendesk status open
-    ZD_STAT_S, // zendesk status solved + close tab
+   
 };
 
 enum plaid_layers {
     _QWERTY,
     _LOWER,
     _RAISE,
-    _ADJUST
+    _ADJUST,
+    _COLEMAK
+};
+
+enum plaid_keycodes {
+    QWERTY = SAFE_RANGE,
+    COLEMAK
 };
 
 #define LOWER MO(_LOWER)
@@ -68,7 +64,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_LCTL,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP, KC_ENT ,
-    KC_ESC, KC_RALT, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_SLSH, KC_LEFT, KC_DOWN,   KC_RGHT
+    KC_ESC, KC_RALT, KC_LALT, KC_LGUI, RAISE,   KC_SPC,  KC_SPC,  LOWER,   KC_SLSH, KC_LEFT, KC_DOWN,   KC_RGHT
+),
+
+/* Colemak
+ * ,-----------------------------------------------------------------------------------.
+ * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * | Esc  |   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  "   |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Ctrl | RAlt | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_COLEMAK] = LAYOUT_plaid_grid(
+    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
+    KC_LCTL,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
+    KC_ESC, KC_RALT, KC_LALT, KC_LGUI, RAISE,   KC_SPC,  KC_SPC,  LOWER,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Lower
@@ -91,25 +105,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
- * |   `  |SLK_H |SLK_HP| EM_O |EM_SS | EM_FU| EM_C |      |      | BIKE |TREAD | Bksp |
+ * |   `  |      |      |      |      |      |      |      |      |      |      | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  1   |  2   |   3  |      |      |      |   -  |   =  |   [  |   ]  |  \   |
+ * | Del  |      |      |      |      |      |      |   -  |   =  |   [  |   ]  |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |SCRN_C|  4   |  5   |  6   |      |      |      |ISO # |ISO / |Pg Up |Pg Dn |      |
+ * |SCRN_C|      |      |      |      |      |      |ISO # |ISO / |Pg Up |Pg Dn |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |  7   |  8   |   9  |   0  |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_plaid_grid(
-    KC_GRV,   S_H,  S_H_P,   E_OP,    E_SS,    E_FU,    E_CL,    _______,    _______,    T_H_B,    T_H_T,    KC_BSPC,
-    KC_DEL,  KC_1,   KC_2,   KC_3,   _______,   _______,   _______,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
-    SCRN_C, KC_4,   KC_5,   KC_6,   _______,  _______,  _______,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
-    _______, KC_7,   KC_8,   KC_9, KC_0, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+     KC_GRV,    KC_1,      KC_2,      KC_3,      KC_4,     KC_5,     KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
+     KC_DEL, _______,   _______,   _______,   _______,  _______,  _______, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,
+    _______, _______,   _______,   _______,   _______,  _______,  _______, KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
+    _______, _______,   _______,   _______,   _______,  _______,  _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
- * |Reset | PEND | OPEN | SOLVE|      |      |      |      |      |      |      |  Del |
+ * |Reset |      |      |      |      |      |      |      |      |      |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |      |Aud on|Audoff|AGnorm|AGswap|      |      |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -119,10 +133,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_plaid_grid(
-    RESET, ZD_STAT_P, ZD_STAT_O, ZD_STAT_S, _______, _______, _______, _______, _______, _______, _______, KC_DEL,
+    RESET, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,
     _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______,  _______, _______,  _______,  _______,
-    _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  TERM_ON, TERM_OFF, _______, _______, _______,
-    RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    RGB_MOD, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  TERM_ON, TERM_OFF, _______, _______, _______,
+    RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, QWERTY,  COLEMAK
 )
 
 
@@ -145,80 +159,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
       //custom keycodes below
 
-       case S_H:
-        if (record->event.pressed) {
-            SEND_STRING("@HERE");
-        }
-        break;
-
-    case S_H_P:
-        if (record->event.pressed) {
-            SEND_STRING("@HERE" SS_TAP(X_SPC) SS_LCTL("v"));
-        }
-        break;
-
-    case T_H_B:
-        if (record->event.pressed) {
-            SEND_STRING("Your Peloton Bike - ");
-        }
-        break;
-
-    case T_H_T:
-        if (record->event.pressed) {
-            SEND_STRING("Your Peloton Tread - ");
-        }
-        break;
-
-    case E_OP:
-        if (record->event.pressed) {
-            // when keycode E_OP is pressed
-            SEND_STRING("Hi , " SS_TAP(X_ENTER) SS_TAP(X_ENTER) "Thank you for contacting Peloton." SS_TAP(X_ENTER) SS_TAP(X_ENTER));
-        }
-        break;
-
-    case E_CL:
-        if (record->event.pressed) {
-            SEND_STRING("Please let me know if you have any other questions." SS_TAP(X_ENTER) SS_TAP(X_ENTER) "Thank you for being the best part of Peloton.");
-        }
-        break;
-
-    case E_FU:
-        if (record->event.pressed) {
-            SEND_STRING("I will be personally watching this issue and will reach out to you after this is complete to make sure everything went smoothly." SS_TAP(X_ENTER) SS_TAP(X_ENTER));
-        }
-        break;
-
-    case E_SS:
-        if (record->event.pressed) {
-            SEND_STRING("Please click here to schedule your service." SS_TAP(X_ENTER) SS_TAP(X_ENTER));
-        }
-        break;
-
-    case SCRN_C:
-        if (record->event.pressed) {
-            tap_code16(C(S(KC_F5)));
-        }
-        break;
-
-        case ZD_STAT_P:
-        if (record->event.pressed) {
-            tap_code16(C(A(KC_P))); //send ctrl+alt+P
-        }
-        break;
-
-    case ZD_STAT_O:
-        if (record->event.pressed) {
-            tap_code16(C(A(KC_O))); //send ctrl+alt+O
-        }
-        break;
-
-    case ZD_STAT_S:
-        if (record->event.pressed) {
-            tap_code16(C(A(KC_S))); // send ctrl+alt+S
-            wait_ms(5000); // wait 5 sec
-            tap_code16(C(A(KC_W))); // send ctrl+alt+W
-        }
-        break;
+       
   }
   return true;
 }
